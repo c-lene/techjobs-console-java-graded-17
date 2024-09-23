@@ -114,7 +114,7 @@ public class JobData {
         // Created a new ArrayList to store results of matched search entries
         ArrayList<HashMap<String, String>> allJobsValue = new ArrayList<>();
 
-        // For-Each Loop iterates through each object in ArrayList "allJobs"
+        // Uses For-Each Loop to iterate through each object in ArrayList "allJobs"
         for (HashMap<String, String> row : allJobs) {
 
             // Nested For-Each Loop to iterate through each HashMap key/value entry to match searched String 'value'
@@ -126,14 +126,6 @@ public class JobData {
                 if (rowValue.contains(value)) {
                     allJobsValue.add(row);
                 }
-
-
-                // Case-Insensitive code
-//                if (rowValue.compareToIgnoreCase(value) == 0) {
-//                    allJobsValue.add(row);
-//                }
-
-
             }
         }
 

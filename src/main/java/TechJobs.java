@@ -44,6 +44,9 @@ public class TechJobs {
 
                     ArrayList<String> results = JobData.findAll(columnChoice);
 
+                    // BONUS MISSION - Alphabetically sorts the strings in ArrayList 'results'
+                    results.sort(null);
+
                     System.out.println("\n*** All " + columnChoices.get(columnChoice) + " Values ***");
 
                     // Print list of skills, employers, etc
@@ -70,7 +73,7 @@ public class TechJobs {
 
 
 
-                /* CT NOTES - Current Idea for Task 3
+                /* CT NOTES - Current Idea for Task 3 - Implementing Case-Insensitive 'searchTerm'
                  * Split the String 'searchTermInput' by spaces " " & will be stored into array
                  * Edit individual string in the Array to make first letter UPPERCASE and rest LOWERCASE
                  * Then combined concat() back into a SINGLE string and assign as searchTerm
