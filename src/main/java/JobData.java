@@ -5,10 +5,7 @@ import org.apache.commons.csv.CSVRecord;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.Reader;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 /**
  * Created by LaunchCode
@@ -18,7 +15,13 @@ public class JobData {
     private static final String DATA_FILE = "src/main/resources/job_data.csv";
     private static boolean isDataLoaded = false;
 
+    // ORIGINAL CODE
     private static ArrayList<HashMap<String, String>> allJobs;
+
+    // CT - Test to see what 'allJobs' ArrayList looks like
+//    public  static ArrayList<HashMap<String, String>> allJobs;
+
+
 
     /**
      * Fetch list of all values from loaded data,
@@ -53,6 +56,8 @@ public class JobData {
         return allJobs;
     }
 
+
+
     /**
      * Returns results of search the jobs data by key/value, using
      * inclusion of the search term.
@@ -75,13 +80,22 @@ public class JobData {
 
             String aValue = row.get(column);
 
+            // Case-Sensitive code that WORKS!!!!!
             if (aValue.contains(value)) {
                 jobs.add(row);
             }
+
+
+            // Case-Insensitive code
+//            if (aValue.compareToIgnoreCase(value) == 0) {
+//                jobs.add(row);
+//            }
         }
 
         return jobs;
     }
+
+
 
     /**
      * Search all columns for the given term
@@ -94,9 +108,41 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
+
         // TODO - implement this method
-        return null;
+
+        // Created a new ArrayList to store results of matched search entries
+        ArrayList<HashMap<String, String>> allJobsValue = new ArrayList<>();
+
+        // For-Each Loop iterates through each object in ArrayList "allJobs"
+        for (HashMap<String, String> row : allJobs) {
+
+            // Nested For-Each Loop to iterate through each HashMap key/value entry to match searched String 'value'
+            for (Map.Entry<String, String> rowEntry : row.entrySet()) {
+
+                String rowValue = rowEntry.getValue();
+
+                // Case-Sensitive - Using IF-Else statement to add current HashMap key/value pairs to allJobsValue ArrayList if String 'value' is contained
+                if (rowValue.contains(value)) {
+                    allJobsValue.add(row);
+                }
+
+
+                // Case-Insensitive code
+//                if (rowValue.compareToIgnoreCase(value) == 0) {
+//                    allJobsValue.add(row);
+//                }
+
+
+            }
+        }
+
+//        return null;
+
+        return allJobsValue;
     }
+
+
 
     /**
      * Read in data from a CSV file and store it in a list

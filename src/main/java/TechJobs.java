@@ -59,10 +59,51 @@ public class TechJobs {
 
                 // What is their search term?
                 System.out.println("\nSearch term:");
-                String searchTerm = in.nextLine();
 
+                // ORIGINAL CODE
+//                String searchTerm = in.nextLine();
+
+
+                // Removed Original code - Added a new String variable for Input search term
+                String strSearchTermInput = in.nextLine();
+
+
+
+
+                /* CT NOTES - Current Idea for Task 3
+                 * Split the String 'searchTermInput' by spaces " " & will be stored into array
+                 * Edit individual string in the Array to make first letter UPPERCASE and rest LOWERCASE
+                 * Then combined concat() back into a SINGLE string and assign as searchTerm
+                 */
+
+                // Splits the input string by spaces " " delimeter & stored into an Array
+                String[] strArraySearchTerm = strSearchTermInput.split(" ");
+                ArrayList<String> strArrayList = new ArrayList<>();
+
+                // Uses For-Each Loop to iterate each string in the String Array
+                for (String strWord : strArraySearchTerm) {
+
+                    // Capitalize first letter in the String & make the rest LOWERCASE
+                    strArrayList.add(strWord.substring(0,1).toUpperCase() + strWord.substring(1).toLowerCase());
+                }
+
+                // Then combine the string with a space delimiter
+                String searchTerm = String.join(" ", strArrayList);
+
+
+
+                // ORIGINAL CODE
+
+                // IF - "all" is selected as searchField
                 if (searchField.equals("all")) {
-                    System.out.println("Search all fields not implemented yet.");
+//                    System.out.println("Search all fields not implemented yet.");
+
+
+                    // THEN - Uses printJobs() to format the result of matched searchTerm by using findByValue() in JobData
+                    printJobs(JobData.findByValue(searchTerm));
+
+
+                    // ELSE - Uses printJobs() to print out results based on 'searchField' & 'searchTerm'
                 } else {
                     printJobs(JobData.findByColumnAndValue(searchField, searchTerm));
                 }
@@ -120,6 +161,28 @@ public class TechJobs {
     // Print a list of jobs
     private static void printJobs(ArrayList<HashMap<String, String>> someJobs) {
 
-        System.out.println("printJobs is not implemented yet");
+//        System.out.println("printJobs is not implemented yet");
+
+
+        // Using IF-ELSE statement to print results - IF 'someJobs' ArrayList contains a match then the size would be > 0
+        if (someJobs.size() > 0) {
+
+            // Added Nested For-Each Loops to print each entry in the Hashmap
+            for (HashMap<String, String> hashMapJob : someJobs) {
+
+                System.out.println("\n*****");
+
+                for (Map.Entry<String, String> jobEntry : hashMapJob.entrySet()) {
+                    System.out.println(jobEntry.getKey() + ": " + jobEntry.getValue());
+                }
+
+                System.out.println("*****");
+            }
+
+            // If 'someJobs' ArrayList has a size of 0
+        } else {
+            System.out.print("No Results");
+        }
+
     }
 }
