@@ -53,7 +53,12 @@ public class JobData {
         // load data, if not already loaded
         loadData();
 
-        return allJobs;
+        // BONUS MISSION #2 - Returning a COPY of 'allJobs'
+        ArrayList<HashMap<String, String>> allJobsCopy = new ArrayList<>(allJobs);
+        return allJobsCopy;
+
+//        return allJobs;
+
     }
 
 
